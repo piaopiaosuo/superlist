@@ -1,4 +1,5 @@
 from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
 import unittest
 import time
 
@@ -38,20 +39,47 @@ class NewVisitorTest(unittest.TestCase):  # ➊
 
     def setUp(self):  # ➋
         self.browser = webdriver.Chrome()
-        self.browser.implicitly_wait(3)
+        # self.browser.implicitly_wait(3)  # 等待三秒
 
     def tearDown(self):  # ➌
-        # time.sleep(2)
         self.browser.quit()
 
     def test_can_start_a_list_and_retrieve_it_later(self):  # ➍
         # 伊迪丝听说有一个很酷的在线待办事项应用
         # 她去看了这个应用的首页
-        self.browser.get('http://localhost:8003')
+        self.browser.get('http://localhost:8003/')
+
         # 她注意到网页的标题和头部都包含“ To-Do ”这个词
+        print(self.browser.title)
         self.assertIn('To-Do', self.browser.title)  # ➎
+        header_text = self.browser.find_element_by_tag_name('h1').text
+        self.assertIn('To-Do', header_text)
+
+        # 应用邀请他输入一个待办事项
+        input_box = self.browser.find_element_by_id('id_new_itme')
+        self.assertEqual(
+            input_box.get_attribute('placeholder'),
+            'Enter a to-do item'
+        )
+
+        # 她在一个文本框中输入了"buy peacock feathers"
+        # 伊迪斯的爱好是使用是使用家蝇做鱼饵钓鱼
+        input_box.send_keys('Buy peacock feathers')
+
+        # 他按回车键后,页面更新了
+        # 待办事项表格中显示了"1, buy peacock feathers"
+        input_box.send_keys(Keys.ENTER)
+
+        table = self.browser.find_element_by_id('id_list_table')
+        rows = table.find_elements_by_tag_name('tr')
+        self.assertEqual(
+            any(row.text == '1: Buy peacock feathers' for row in rows)
+        )
+
+        # 页面中有显示了一个文本框, 可以输入其他的待办事项
+        # 他输入了"use peacock feathres to make afly"
+        # 伊迪斯做事很有条理
         self.fail('Finish the test!')  # ➏
-        # 应用邀请她输入一个待办事项
 
 
 if __name__ == '__main__':  # ➐
