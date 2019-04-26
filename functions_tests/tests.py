@@ -74,6 +74,7 @@ class NewVisitorTest(unittest.TestCase):  # ➊
         rows = table.find_elements_by_tag_name('tr')
         # print([row.text for row in rows])
         # time.sleep(3)
+        print(1234, [row.text for row in rows])
         self.assertIn('1: Buy peacock feathers', [row.text for row in rows],
                       'this is a test'
                       )
