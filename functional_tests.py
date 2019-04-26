@@ -51,6 +51,7 @@ class NewVisitorTest(unittest.TestCase):  # ➊
 
         # 她注意到网页的标题和头部都包含“ To-Do ”这个词
         print(self.browser.title)
+        time.sleep(3)
         self.assertIn('To-Do', self.browser.title)  # ➎
         header_text = self.browser.find_element_by_tag_name('h1').text
         self.assertIn('To-Do', header_text)
@@ -69,13 +70,19 @@ class NewVisitorTest(unittest.TestCase):  # ➊
         # 他按回车键后,页面更新了
         # 待办事项表格中显示了"1, buy peacock feathers"
         input_box.send_keys(Keys.ENTER)
-
         table = self.browser.find_element_by_id('id_list_table')
         rows = table.find_elements_by_tag_name('tr')
-        self.assertTrue(
-            any(row.text == '1: Buy peacock feathers' for row in rows),
-            "New to-do item did not appear in table"
-        )
+        # print([row.text for row in rows])
+        # time.sleep(3)
+        self.assertIn('1: Buy peacock feathers', [row.text for row in rows],
+                      'this is a test'
+                      )
+        # self.assertTrue(
+        #     any(row.text == '1: Buy peacock feathers' for row in rows),
+        #     "New to-do item did not appear in table -- its text was:\n %s" % (
+        #         table.text
+        #     )
+        # )
 
         # 页面中有显示了一个文本框, 可以输入其他的待办事项
         # 他输入了"use peacock feathres to make afly"
