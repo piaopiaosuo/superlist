@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="5eb24de8-7e4b-4f8c-bc96-a6497d669549" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/functions_tests/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/functions_tests/tests.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -81,8 +80,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/functions_tests/tests.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="134" lean-forward="true" selection-start-line="134" selection-end-line="134" />
+            <state relative-caret-position="162">
+              <caret line="45" column="16" selection-start-line="45" selection-start-column="8" selection-end-line="45" selection-end-column="16" />
               <folding>
                 <element signature="e#0#30#0" expanded="true" />
               </folding>
@@ -399,7 +398,7 @@
       <updated>1556158814260</updated>
       <workItem from="1556158816439" duration="19060000" />
       <workItem from="1556241447111" duration="12751000" />
-      <workItem from="1556279253604" duration="2276000" />
+      <workItem from="1556279253604" duration="2662000" />
     </task>
     <servers />
   </component>
@@ -436,7 +435,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="34087000" />
+    <option name="totallyTimeSpent" value="34473000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -449,7 +448,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1920" y="-2" width="1920" height="1082" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13222697" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -464,7 +462,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32930845" />
       <window_info anchor="bottom" id="Database Changes" order="9" weight="0.32930845" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.3402854" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.27442372" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="bottom" id="manage.py@superlist" order="12" weight="0.32930845" />
       <window_info anchor="bottom" id="Python Console" order="13" weight="0.32930845" />
@@ -593,8 +591,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/functions_tests/tests.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="134" lean-forward="true" selection-start-line="134" selection-end-line="134" />
+        <state relative-caret-position="162">
+          <caret line="45" column="16" selection-start-line="45" selection-start-column="8" selection-end-line="45" selection-end-column="16" />
           <folding>
             <element signature="e#0#30#0" expanded="true" />
           </folding>
