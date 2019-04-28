@@ -20,11 +20,11 @@ class NewVisitorTest(StaticLiveServerTestCase):
         cls.server_url = cls.live_server_url
 
     def setUp(self):
-        self.browser = webdriver.Firefox()
+        self.browser = webdriver.Chrome()
 
     def tearDown(self):
+        time.sleep(5)
         self.browser.quit()
-
 
     def wait_for_row_in_list_table(self, row_text):
         start_time = time.time()
@@ -38,7 +38,6 @@ class NewVisitorTest(StaticLiveServerTestCase):
                 if time.time() - start_time > MAX_WAIT:
                     raise e
                 time.sleep(0.5)
-
 
     def test_can_start_a_list_for_one_user(self):
         # Edith has heard about a cool new online to-do app. She goes
@@ -79,7 +78,6 @@ class NewVisitorTest(StaticLiveServerTestCase):
 
         # Satisfied, she goes back to sleep
 
-
     def test_multiple_users_can_start_lists_at_different_urls(self):
         # Edith start a new todo list
         self.browser.get(self.server_url)
@@ -97,7 +95,7 @@ class NewVisitorTest(StaticLiveServerTestCase):
         ## We use a new browser session to make sure that no information
         ## of Edith's is coming through from cookies etc
         self.browser.quit()
-        self.browser = webdriver.Firefox()
+        self.browser = webdriver.Chrome()
 
         # Francis visits the home page.  There is no sign of Edith's
         # list
@@ -125,7 +123,6 @@ class NewVisitorTest(StaticLiveServerTestCase):
 
         # Satisfied, they both go back to sleep
 
-
     def test_layout_and_styling(self):
         # Edith goes to the home page
         self.browser.get(self.server_url)
@@ -150,4 +147,3 @@ class NewVisitorTest(StaticLiveServerTestCase):
             512,
             delta=5
         )
-
