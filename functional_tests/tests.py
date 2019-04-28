@@ -2,13 +2,14 @@ from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium import webdriver
 from selenium.common.exceptions import WebDriverException
 from selenium.webdriver.common.keys import Keys
+from unittest import skip
 import sys
 import time
 
 MAX_WAIT = 10
 
 
-class NewVisitorTest(StaticLiveServerTestCase):
+class FunctionalTest(StaticLiveServerTestCase):
 
     @classmethod
     def setUpClass(cls):
@@ -23,7 +24,7 @@ class NewVisitorTest(StaticLiveServerTestCase):
         self.browser = webdriver.Chrome()
 
     def tearDown(self):
-        time.sleep(5)
+        # time.sleep(5)
         self.browser.quit()
 
     def wait_for_row_in_list_table(self, row_text):
@@ -38,6 +39,9 @@ class NewVisitorTest(StaticLiveServerTestCase):
                 if time.time() - start_time > MAX_WAIT:
                     raise e
                 time.sleep(0.5)
+
+
+class NewVisitorTest(FunctionalTest):
 
     def test_can_start_a_list_for_one_user(self):
         # Edith has heard about a cool new online to-do app. She goes
@@ -123,6 +127,8 @@ class NewVisitorTest(StaticLiveServerTestCase):
 
         # Satisfied, they both go back to sleep
 
+
+class LayoutAndStylingTest(FunctionalTest):
     def test_layout_and_styling(self):
         # Edith goes to the home page
         self.browser.get(self.server_url)
@@ -147,3 +153,23 @@ class NewVisitorTest(StaticLiveServerTestCase):
             512,
             delta=5
         )
+
+
+class ItemValidationTest(FunctionalTest):
+
+    @skip
+    def test_cannot_add_empty_list_items(self):
+        # 伊迪丝访问首页,不小心提交了一个空待办事项
+        # 输入框中没输入内容,她就按下了回车键
+
+        # 首页刷新了,显示一个错误消息
+        # 提示待办事项不能为空
+
+        # 她输入一些文字,然后再次提交,这次没问题了
+
+        # 她有点儿调皮,又提交了一个空待办事项
+
+        # 在清单页面她看到了一个类似的错误消息
+
+        # 输入文字之后就没问题了
+        self.fail('write me!')
