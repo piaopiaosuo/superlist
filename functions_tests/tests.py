@@ -1,8 +1,11 @@
+import time
+import sys
+
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
-import unittest
+from unittest import skip
 from django.test import LiveServerTestCase
-import time
+from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 
 
 # browser = webdriver.Chrome()
@@ -37,7 +40,24 @@ import time
 
 
 # class NewVisitorTest(unittest.TestCase):  # ➊
-class NewVisitorTest(LiveServerTestCase):  # ➊
+# class NewVisitorTest(LiveServerTestCase):  # ➊
+class NewVisitorTest(StaticLiveServerTestCase):  # ➊
+
+    @classmethod
+    def setUpClass(cls):
+        print('-'*20)
+        for arg in sys.argv:  # ➋
+            if 'liveserver' in arg:  # ➌
+                cls.server_url = 'http://' + arg.split('=')[1]  # ➍
+                return  # ➎
+        super().setUpClass()
+        print(111, cls.live_server_url)
+        cls.server_url = cls.live_server_url
+
+    @classmethod
+    def tearDownClass(cls):
+        if cls.server_url == cls.live_server_url:
+            super().tearDownClass()
 
     def setUp(self):  # ➋
         self.browser = webdriver.Chrome()
@@ -55,8 +75,9 @@ class NewVisitorTest(LiveServerTestCase):  # ➊
         # 伊迪丝听说有一个很酷的在线待办事项应用
         # 她去看了这个应用的首页
         # self.browser.get('http://localhost:8003/')
-        self.browser.get(self.live_server_url)
-
+        # self.browser.get(self.live_server_url)
+        self.browser.get(self.server_url)
+        print(123, self.live_server_url)
         # 她注意到网页的标题和头部都包含“ To-Do ”这个词
         print(self.browser.title)
         time.sleep(3)
@@ -78,18 +99,17 @@ class NewVisitorTest(LiveServerTestCase):  # ➊
         input_box.send_keys('Buy peacock feathers')
         input_box.send_keys(Keys.ENTER)
         edith_list_url = self.browser.current_url
-
-        self.assertRegex(edith_list_url, '/lists/.+')
+        self.assertRegex(edith_list_url, '/list/.+')
         # 页面中又显示了一个文本框,可以输入其他的待办事项
         # ” 使用孔雀羽毛做假蝇)
         # 她输入了“ Use peacock feathers to make a fly (
         # 伊迪丝做事很有条理
-        # input_box = self.browser.find_element_by_id('id_new_item')
-        # input_box.send_keys('Use peacock feathers to make a fly')
+        input_box = self.browser.find_element_by_id('id_new_item')
+        input_box.send_keys('Use peacock feathers to make a fly')
         #
         # # 他按回车键后,页面更新了
         # # 待办事项表格中显示了"1, buy peacock feathers"
-        # input_box.send_keys(Keys.ENTER)
+        input_box.send_keys(Keys.ENTER)
         self.check_for_row_in_list_table('1: Buy peacock feathers')
         self.check_for_row_in_list_table(
             '2: Use peacock feathers to make a fly')
@@ -127,6 +147,22 @@ class NewVisitorTest(LiveServerTestCase):  # ➊
         # 伊迪斯做事很有条理
         self.fail('Finish the test!')  # ➏
 
+    @skip
+    def test_cannot_add_empty_list_items(self):
+        # 伊迪丝访问首页,不小心提交了一个空待办事项
+        # 输入框中没输入内容,她就按下了回车键
+
+        # 首页刷新了,显示一个错误消息
+        # 提示待办事项不能为空
+
+        # 她输入一些文字,然后再次提交,这次没问题了
+
+        # 她有点儿调皮,又提交了一个空待办事项
+
+        # 在清单页面她看到了一个类似的错误消息
+
+        # 输入文字之后就没问题了
+        self.fail('write me!')
 
 # if __name__ == '__main__':  # ➐
 #     unittest.main(warnings='ignore')  # ➑
