@@ -3,7 +3,6 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
 
-
 class NewVisitorTest(FunctionalTest):
 
     def test_can_start_a_list_for_one_user(self):
@@ -44,7 +43,6 @@ class NewVisitorTest(FunctionalTest):
         self.wait_for_row_in_list_table('1: Buy peacock feathers')
 
         # Satisfied, she goes back to sleep
-
 
     def test_multiple_users_can_start_lists_at_different_urls(self):
         # Edith start a new todo list
