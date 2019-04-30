@@ -11,10 +11,18 @@ from lists.models import Item, List
 class HomePageTest(TestCase):
 
     def test_uses_home_template(self):
+        """
+        测试是否使用了正确的模板
+        :return:
+        """
         response = self.client.get('/')
         self.assertTemplateUsed(response, 'home.html')
 
     def test_home_page_uses_item_form(self):
+        """
+        测试是否使用了表单
+        :return:
+        """
         response = self.client.get('/')
         self.assertIsInstance(response.context['form'], ItemForm)
 
@@ -22,17 +30,29 @@ class HomePageTest(TestCase):
 class NewListTest(TestCase):
 
     def test_can_save_a_POST_request(self):
+        """
+        测试post是否能保存到数据库
+        :return:
+        """
         self.client.post('/lists/new', data={'text': 'A new list item'})
         self.assertEqual(Item.objects.count(), 1)
         new_item = Item.objects.first()
         self.assertEqual(new_item.text, 'A new list item')
 
     def test_redirects_after_POST(self):
+        """
+        测试是否跳转
+        :return:
+        """
         response = self.client.post('/lists/new', data={'text': 'A new list item'})
         new_list = List.objects.first()
         self.assertRedirects(response, '/lists/%d/' % (new_list.id,))
 
     def test_for_invalid_input_renders_home_template(self):
+        """
+
+        :return:
+        """
         response = self.client.post('/lists/new', data={'text': ''})
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'home.html')
