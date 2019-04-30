@@ -84,7 +84,7 @@ class ListModelTest(TestCase):
 
     def test_get_absolute_url(self):
         """
-        测试跳转url
+        测试url
         :return:
         """
         list_ = List.objects.create()
