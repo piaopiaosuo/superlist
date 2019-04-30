@@ -29,4 +29,3 @@ class LayoutAndStylingTest(FunctionalTest):
             512,
             delta=5
         )
-
